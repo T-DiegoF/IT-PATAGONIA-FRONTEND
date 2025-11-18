@@ -1,71 +1,77 @@
-<div class="container mt-4">
+<div class="container py-4">
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-12 col-md-8 col-lg-6">
       <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white">
-          <h4 class="mb-0">Nueva Empresa</h4>
-        </div>
         <div class="card-body">
+          <h2 class="h4 mb-4">Nueva Empresa</h2>
+
           <form #companyForm="ngForm" (ngSubmit)="onSubmit(companyForm)" novalidate>
-            <!-- Campo Nombre -->
+            <!-- Nombre -->
             <div class="mb-3">
-              <label for="name" class="form-label">Nombre:</label>
-              <input 
-                type="text" 
-                id="name" 
-                name="name" 
-                class="form-control" 
-                [(ngModel)]="company.name" 
-                #nameInput="ngModel"
+              <label for="name" class="form-label">Nombre</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
                 required
-                [class.is-invalid]="nameInput.invalid && (nameInput.touched || companyForm.submitted)">
-              <!-- Mensaje de error para "Nombre" -->
-              <div *ngIf="nameInput.invalid && (nameInput.touched || companyForm.submitted)" class="invalid-feedback">
+                [(ngModel)]="company.name"
+                #name="ngModel"
+                class="form-control"
+                [ngClass]="{'is-invalid': name.invalid && name.touched}"
+                placeholder="Ej: Coca Cola"
+              />
+              <div *ngIf="name.invalid && name.touched" class="invalid-feedback">
                 El nombre es obligatorio.
               </div>
             </div>
-            <!-- Campo Tipo -->
+
+            <!-- Tipo -->
             <div class="mb-3">
-              <label for="type" class="form-label">Tipo:</label>
-              <select 
-                id="type" 
-                name="type" 
-                class="form-select" 
-                [(ngModel)]="company.type"
-                #typeInput="ngModel"
+              <label for="type" class="form-label">Tipo</label>
+              <select
+                id="type"
+                name="type"
                 required
-                [class.is-invalid]="typeInput.invalid && (typeInput.touched || companyForm.submitted)">
+                [(ngModel)]="company.type"
+                #type="ngModel"
+                class="form-select"
+                [ngClass]="{'is-invalid': type.invalid && type.touched}"
+              >
                 <option value="">Seleccione...</option>
                 <option value="PYME">PYME</option>
-                <option value="Corporativa">Corporativa</option>
+                <option value="CORPORATIVA">CORPORATIVA</option>
               </select>
-              <!-- Mensaje de error para "Tipo" -->
-              <div *ngIf="typeInput.invalid && (typeInput.touched || companyForm.submitted)" class="invalid-feedback">
+              <div *ngIf="type.invalid && type.touched" class="invalid-feedback">
                 Seleccione un tipo de empresa.
               </div>
             </div>
-            <!-- Campo Fecha de ingreso -->
+
+            <!-- Fecha de ingreso -->
             <div class="mb-3">
-              <label for="date" class="form-label">Fecha de ingreso:</label>
-              <input 
-                type="date" 
-                id="date" 
-                name="date" 
-                class="form-control" 
-                [(ngModel)]="company.date" 
-                #dateInput="ngModel"
+              <label for="date" class="form-label">Fecha de ingreso</label>
+              <input
+                type="date"
+                id="date"
+                name="date"
                 required
-                [class.is-invalid]="dateInput.invalid && (dateInput.touched || companyForm.submitted)">
-              <!-- Mensaje de error para "Fecha" -->
-              <div *ngIf="dateInput.invalid && (dateInput.touched || companyForm.submitted)" class="invalid-feedback">
+                [(ngModel)]="company.date"
+                #date="ngModel"
+                class="form-control"
+                [ngClass]="{'is-invalid': date.invalid && date.touched}"
+              />
+              <div *ngIf="date.invalid && date.touched" class="invalid-feedback">
                 La fecha de ingreso es obligatoria.
               </div>
+              <div class="form-text">Se enviará como DD/MM/YYYY.</div>
             </div>
-            <!-- Botón de envío -->
-            <button type="submit" class="btn btn-primary" [disabled]="companyForm.invalid">
-              Enviar
-            </button>
+
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary">
+                Enviar
+              </button>
+            </div>
           </form>
+
         </div>
       </div>
     </div>
